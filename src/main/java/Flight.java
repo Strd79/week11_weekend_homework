@@ -55,4 +55,7 @@ public class Flight {
         }
     }
 
+    public int getBaggageTotalWeight() {
+        return this.plane.getWeight() / 2;
+    }
 }

@@ -4,7 +4,7 @@ public class FlightManager {
     }
 
     public int baggageWeightPerPassenger(Flight flight) {
-        int baggageTotal = flight.getPlane().getWeight() / 2;
+        int baggageTotal = flight.getBaggageTotalWeight();
         int planeCapacity = flight.getPlane().getCapacity();
         return baggageTotal / planeCapacity;
     }
@@ -16,5 +16,9 @@ public class FlightManager {
         }
         int baggageWeight = baggageWeightPerPassenger(flight);
         return baggageCount * baggageWeight;
+    }
+
+    public int remainingBaggageWeightOnFlight(Flight flight) {
+        return flight.getBaggageTotalWeight() - this.baggageWeightBookedOnFlight(flight);
     }
 }

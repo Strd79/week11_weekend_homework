@@ -34,4 +34,10 @@ public class FlightManagerTest {
     public void checkBaggageWeightBookedOnFlight() {
         assertEquals(1734, flightManager.baggageWeightBookedOnFlight(flight2));
     }
+
+    @Test
+    public void checkRemainingBaggageWeightOnFlight() {
+        assertEquals(9266, flightManager.remainingBaggageWeightOnFlight(flight2));
+    }
+
 }
