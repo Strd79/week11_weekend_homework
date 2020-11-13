@@ -14,8 +14,8 @@ public class FlightManagerTest {
 
     @Before
     public void before() {
-        flight1 = new Flight(PlaneType.LEARJET_23, "TJ0805", "LCY", "GLA", "14:00");
-        flight2 = new Flight(PlaneType.GULFSTREAM_G500, "TJ9752", "SXF", "GLA", "19:00");
+        flight1 = new Flight(PlaneType.LEARJET_23, "TJ0805", "LCY", "GLA", );
+        flight2 = new Flight(PlaneType.GULFSTREAM_G500, "TJ9752", "SXF", "GLA", );
         flightManager = new FlightManager();
         passenger1 = new Passenger("David", 1);
         passenger2 = new Passenger("Kyle", 0);

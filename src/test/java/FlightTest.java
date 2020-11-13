@@ -1,5 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
+import sun.jvm.hotspot.ui.EditableAtEndDocument;
+
+import java.sql.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,8 +22,8 @@ public class FlightTest {
 
     @Before
     public void before() {
-        flight1 = new Flight(PlaneType.LEARJET_23, "TJ0805", "LCY", "GLA", "14:00");
-        flight2 = new Flight(PlaneType.BOEING_787, "TJ3456", "LAX", "GLA", "08:30");
+        flight1 = new Flight(PlaneType.LEARJET_23, "TJ0805", "LCY", "GLA", );
+        flight2 = new Flight(PlaneType.BOEING_787, "TJ3456", "LAX", "GLA", );
         passenger1 = new Passenger("David", 1);
         passenger2 = new Passenger("Kyle", 0);
         passenger3 = new Passenger("Ewen", 2);
