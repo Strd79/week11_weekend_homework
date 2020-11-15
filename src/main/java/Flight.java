@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class Flight {
 
@@ -9,6 +10,7 @@ public class Flight {
     private String destination;
     private String departureAirport;
     private Date departureTime;
+    private ArrayList<Integer> seatNumbersBooked;
 
     public Flight(PlaneType plane, String flightNumber, String destination, String departureAirport, Date departureTime) {
         this.passengers = new ArrayList<Passenger>();
@@ -17,6 +19,7 @@ public class Flight {
         this.destination = destination;
         this.departureAirport = departureAirport;
         this.departureTime = new Date();
+        this.seatNumbersBooked = new ArrayList<Integer>();
     }
 
     public ArrayList<Passenger> getPassengers() {
@@ -43,16 +46,34 @@ public class Flight {
         return departureTime;
     }
 
+    public ArrayList<Integer> getSeatNumbersBooked() {
+        return seatNumbersBooked;
+    }
+
     public int getNumOfAvailSeats() {
         int planeCapacity = this.plane.getCapacity();
         int bookedPassengers = this.passengers.size();
         return planeCapacity - bookedPassengers;
     }
 
+    public int assignSeatNumber() {
+        Random rand = new Random();
+        int upperBound = plane.getCapacity();
+        int seatNumber = rand.nextInt(upperBound);
+        if (this.seatNumbersBooked.contains(seatNumber)) {
+            return assignSeatNumber();
+        } else {
+            this.seatNumbersBooked.add(seatNumber);
+            return seatNumber;
+        }
+    }
+
     public void bookPassengerOnFlight(Passenger passenger) {
         int availSeats = this.getNumOfAvailSeats();
         if (availSeats > 0) {
             this.getPassengers().add(passenger);
+            passenger.setFlight(this.flightNumber);
+            passenger.setSeatNumber(assignSeatNumber());
         }
     }
 

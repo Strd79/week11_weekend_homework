@@ -1,10 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
-import sun.jvm.hotspot.ui.EditableAtEndDocument;
+import java.util.Date;
 
-import java.sql.Date;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class FlightTest {
 
@@ -19,11 +17,15 @@ public class FlightTest {
     Passenger passenger7;
     Passenger passenger8;
     Passenger passenger9;
+    Date date1;
+    Date date2;
 
     @Before
     public void before() {
-        flight1 = new Flight(PlaneType.LEARJET_23, "TJ0805", "LCY", "GLA", );
-        flight2 = new Flight(PlaneType.BOEING_787, "TJ3456", "LAX", "GLA", );
+        date1 = new java.util.Date(2020, 10, 15, 14, 0, 0);
+        date2 = new java.util.Date(2020, 10, 16, 20, 30, 0);
+        flight1 = new Flight(PlaneType.LEARJET_23, "TJ0805", "LCY", "GLA", date1);
+        flight2 = new Flight(PlaneType.BOEING_787, "TJ3456", "LAX", "GLA", date2);
         passenger1 = new Passenger("David", 1);
         passenger2 = new Passenger("Kyle", 0);
         passenger3 = new Passenger("Ewen", 2);
@@ -57,7 +59,7 @@ public class FlightTest {
 
     @Test
     public void hasDepartureTime() {
-        assertEquals("14:00", flight1.getDepartureTime());
+        assertNotNull(flight1.getDepartureTime());
     }
 
     @Test
@@ -96,5 +98,40 @@ public class FlightTest {
     @Test
     public void canGetBaggageTotalWeight() {
         assertEquals(114000, flight2.getBaggageTotalWeight());
+    }
+
+    @Test
+    public void passengerHasFlightNumberAssigned() {
+        flight2.bookPassengerOnFlight(passenger1);
+        assertEquals("TJ3456", passenger1.getFlight());
+    }
+
+    @Test
+    public void passengerHasNoFlightNumberAssigned() {
+        assertNull(passenger2.getFlight());
+    }
+
+    @Test
+    public void passengerHasSeatNumber() {
+        flight1.bookPassengerOnFlight(passenger6);
+        assertNotNull(passenger6.getSeatNumber());
+    }
+
+    @Test
+    public void passengerHasNoSeatNumber() {
+        assertNull(passenger7.getSeatNumber());
+    }
+
+    @Test
+    public void checkSeatNumbersAreNotDuplicated() {
+        flight1.bookPassengerOnFlight(passenger1);
+        flight1.bookPassengerOnFlight(passenger2);
+        flight1.bookPassengerOnFlight(passenger3);
+        flight1.bookPassengerOnFlight(passenger4);
+        flight1.bookPassengerOnFlight(passenger5);
+        flight1.bookPassengerOnFlight(passenger6);
+        flight1.bookPassengerOnFlight(passenger7);
+        flight1.bookPassengerOnFlight(passenger8);
+        assertEquals ("", flight1.getSeatNumbersBooked());
     }
 }
