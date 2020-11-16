@@ -18,7 +18,7 @@ public class Flight {
         this.flightNumber = flightNumber;
         this.destination = destination;
         this.departureAirport = departureAirport;
-        this.departureTime = new Date();
+        this.departureTime = departureTime;
         this.seatNumbersBooked = new ArrayList<Integer>();
     }
 
@@ -60,7 +60,8 @@ public class Flight {
         Random rand = new Random();
         int upperBound = plane.getCapacity();
         int seatNumber = rand.nextInt(upperBound);
-        if (this.seatNumbersBooked.contains(seatNumber)) {
+        int newSeatNumber = seatNumber += 1;
+        if (this.seatNumbersBooked.contains(newSeatNumber)) {
             return assignSeatNumber();
         } else {
             this.seatNumbersBooked.add(seatNumber);

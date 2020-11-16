@@ -59,7 +59,7 @@ public class FlightTest {
 
     @Test
     public void hasDepartureTime() {
-        assertNotNull(flight1.getDepartureTime());
+        assertEquals(date1, flight1.getDepartureTime());
     }
 
     @Test
